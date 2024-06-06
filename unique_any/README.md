@@ -2,11 +2,10 @@
 
 `unique_any` can be used to type erase types that are not copy-constructible. It is needed because `std::any` cannot do that.
 
-[Demo](https://godbolt.org/z/YMxzqqaTj)
+[Demo](https://godbolt.org/z/EKP6q3f9n)
 
 ```cpp
 #include <cassert>
-#include <any>
 #include <array>
 
 template <typename ...T>
