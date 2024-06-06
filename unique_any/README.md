@@ -2,19 +2,18 @@
 
 `unique_any` can be used to type erase types that are not copy-constructible. It is needed because `std::any` cannot do that.
 
-[Demo](https://godbolt.org/z/hMxb1bcb6)
+[Demo](https://godbolt.org/z/bKhqeGKz9)
 
 ```cpp
+#include <cassert>
 #include <any>
 #include <array>
-#include <iostream>
 
 template <typename ...T>
 inline constexpr bool always_false_v = false;
 
+template<auto MAX_STORAGE_SIZE = 256, auto ALIGNMENT = 32>
 struct unique_any final {
-    static constexpr std::size_t ALIGNMENT = 32;
-    static constexpr std::size_t MAX_STORAGE_SIZE = 256;
     using storage_t = std::array<std::byte, MAX_STORAGE_SIZE>;
 
     template <typename Type, typename BaseType = std::decay_t<Type>>
@@ -97,9 +96,10 @@ struct NonCopyable {
 
 int main(int argc, char** argv) {
     unique_any any = NonCopyable{5};
-    std::cout << any.get<NonCopyable>().value << std::endl;
+    assert(any.get<NonCopyable>().value == 5);
     any = 23.5f;
-    std::cout << any.get<float>() << std::endl;
+    assert(any.get<float>() == 23.5f);
     return 0;
 }
+
 ```
