@@ -2,18 +2,15 @@
 
 Convert C++ objects to and from JSON
 
-[Demo](https://godbolt.org/z/PhchGEMGb)
+[Demo](https://godbolt.org/z/KaTbh8e6d)
 
 ```cpp
 #include <https://raw.githubusercontent.com/boost-ext/reflect/main/reflect>
 #include <nlohmann/json.hpp>
 
 #include <map>
-#include <string_view>
 #include <vector>
 #include <variant>
-
-using std::literals::operator""sv;
 
 struct some_type {
     std::variant<std::optional<int>, float> a; 
