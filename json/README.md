@@ -2,12 +2,13 @@
 
 Convert C++ objects to and from JSON
 
-[Demo](https://godbolt.org/z/KaTbh8e6d)
+[Demo](https://godbolt.org/z/1a1Geb8ve)
 
 ```cpp
 #include <https://raw.githubusercontent.com/boost-ext/reflect/main/reflect>
 #include <nlohmann/json.hpp>
 
+#include <iostream>
 #include <map>
 #include <vector>
 #include <variant>
@@ -30,13 +31,6 @@ struct composite_type {
 static_assert(std::is_aggregate_v<some_type>);
 static_assert(std::is_aggregate_v<another_type>);
 static_assert(std::is_aggregate_v<composite_type>);
-
-template <typename... Ts>
-[[nodiscard]] std::variant<Ts...> map_index_to_variant(std::size_t i, std::variant<Ts...>) {
-    assert(i < sizeof...(Ts));
-    static constexpr std::variant<Ts...> table[] = {Ts{}...};
-    return table[i];
-}
 
 namespace json {
 
@@ -273,7 +267,6 @@ struct to_json_t {
 } // namespace json 
 
 
-#include <iostream>
 int main() {
     auto object =  std::tuple{
         std::tuple{std::string{"first"}, std::vector{some_type{.a=1.0f, .b=5}, some_type{std::nullopt, 2}}},
