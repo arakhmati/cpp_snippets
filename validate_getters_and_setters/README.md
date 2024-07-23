@@ -1,4 +1,4 @@
-# JSON
+# Validate Getters and Setters
 
 Force the struct to have common path for getting and setting an attribute
 
