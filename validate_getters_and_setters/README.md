@@ -2,7 +2,7 @@
 
 Force the struct to have common path for getting and setting an attribute
 
-[Demo](https://godbolt.org/z/7bGjqhdf8)
+[Demo](https://godbolt.org/z/jrG6zrnTx)
 
 ```cpp
 #include <https://raw.githubusercontent.com/boost-ext/reflect/main/reflect>
@@ -10,15 +10,6 @@ Force the struct to have common path for getting and setting an attribute
 #include <iostream>
 #include <optional>
 #include <filesystem>
-
-template<reflect::fixed_string string, reflect::fixed_string other>
-constexpr bool compare_fixed_strings () {
-    if constexpr (string.size() != other.size()) {
-        return false;
-    } else {
-        return string == other;
-    }
-}
 
 struct config_t {
     struct attributes_t {
